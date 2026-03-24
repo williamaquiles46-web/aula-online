@@ -9,7 +9,7 @@ from modolos.mentoria import Mentoria
 from modolos.exercicio import Exercicio
 from modolos.avaliacao import Avaliacao
 
-# Fachada única para acessar todos os gerenciadores
+
 plataforma = GerenciadorPlataforma()
 
 class AulaOnlineApp:
@@ -33,7 +33,7 @@ class AulaOnlineApp:
         """Limpa e reconstrói a área de conteúdo baseada na aba ativa."""
         self.container_principal.delete_components()
         try:
-            # MAPEAMENTO DE TODOS OS MÓDULOS (Evita AttributeError)
+           
             if self.aba_ativa == "dashboard": self.view_dashboard()
             elif self.aba_ativa == "estudantes": self.view_estudantes()
             elif self.aba_ativa == "professores": self.view_professores()
@@ -46,7 +46,7 @@ class AulaOnlineApp:
             self.avisar(f"Erro no sistema: {str(e)}", erro=True)
         await page.update()
 
-    # --- VIEWS DE CADASTRO E INTERAÇÃO ---
+    
 
     def view_dashboard(self):
         jp.H1(a=self.container_principal, text="🏠 Painel Geral", classes="text-3xl font-black text-slate-800 mb-8")
@@ -174,7 +174,6 @@ class AulaOnlineApp:
         jp.Button(a=f, text="Registrar", click=pagar, classes="bg-amber-600 text-white font-bold p-2 rounded")
         self.gerar_tabela_interativa(["Estudante", "Valor"], plataforma.getGerenciadorFinanceiro().getPagamentos(), ["getEstudante", "getValor"], "financeiro")
 
-    # --- TABELA INTERATIVA (POLIMORFISMO DE REMOÇÃO) ---
     def gerar_tabela_interativa(self, colunas, lista, metodos, tipo):
         if not lista:
             jp.P(a=self.container_principal, text="Nenhum registro encontrado.", classes="italic text-slate-400 mt-4")
